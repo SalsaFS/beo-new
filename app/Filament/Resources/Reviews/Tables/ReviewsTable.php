@@ -1,0 +1,53 @@
+<?php
+
+namespace App\Filament\Resources\Reviews\Tables;
+
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
+
+class ReviewsTable
+{
+    public static function configure(Table $table): Table
+    {
+        return $table
+            ->columns([
+                TextColumn::make('guest')
+                    ->searchable(),
+                TextColumn::make('platform.name')
+                    ->sortable(),
+                TextColumn::make('date_issued')
+                    ->date()
+                    ->sortable(),
+                TextColumn::make('review')
+                    ->searchable()
+                    ->wrap(),
+
+            ])
+            ->filters([
+                //
+            ])
+            ->recordActions([
+                ViewAction::make()
+                    ->modal()
+                    ->hiddenLabel()
+                    ->tooltip('View'),
+                EditAction::make()
+                    ->modal()
+                    ->hiddenLabel()
+                    ->tooltip('Edit'),
+                DeleteAction::make()
+                    ->hiddenLabel()
+                    ->tooltip('Delete'),
+            ])
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
+}

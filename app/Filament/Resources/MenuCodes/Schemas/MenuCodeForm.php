@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Filament\Resources\MenuCodes\Schemas;
+
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Schema;
+
+class MenuCodeForm
+{
+    public static function configure(Schema $schema): Schema
+    {
+        return $schema
+            ->columns(1)
+            ->components([
+                TextInput::make('name')
+                    ->required(),
+            ]);
+    }
+}
