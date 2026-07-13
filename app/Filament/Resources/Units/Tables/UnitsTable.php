@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Units\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
@@ -16,24 +17,24 @@ class UnitsTable
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->searchable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->searchable()
+                    ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->recordActions([
                 ViewAction::make()
-                    ->modal(),
+                    ->modal()
+                    ->hiddenLabel()
+                    ->tooltip('View'),
                 EditAction::make()
-                    ->modal(),
+                    ->modal()
+                    ->hiddenLabel()
+                    ->tooltip('Edit'),
+                DeleteAction::make()
+                    ->hiddenLabel()
+                    ->tooltip('Delete'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

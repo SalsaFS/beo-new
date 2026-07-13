@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Ingredients\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
@@ -19,23 +20,22 @@ class IngredientsTable
                     ->searchable(),
                 TextColumn::make('article_code')
                     ->searchable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->recordActions([
                 ViewAction::make()
-                    ->modal(),
+                    ->modal()
+                    ->hiddenLabel()
+                    ->tooltip('View'),
                 EditAction::make()
-                    ->modal(),
+                    ->modal()
+                    ->hiddenLabel()
+                    ->tooltip('Edit'),
+                DeleteAction::make()
+                    ->hiddenLabel()
+                    ->tooltip('Delete'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

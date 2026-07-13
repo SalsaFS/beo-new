@@ -8,6 +8,8 @@ use Database\Seeders\PlatformSeeder;
 use Database\Seeders\ReviewSeeder;
 use Database\Seeders\PositionSeeder;
 use Database\Seeders\VenueSeeder;
+use Database\Seeders\UnitSeeder;
+use Database\Seeders\IngredientSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -33,6 +35,8 @@ class DatabaseSeeder extends Seeder
             ReviewSeeder::class,
             PositionSeeder::class,
             VenueSeeder::class,
+            UnitSeeder::class,
+            IngredientSeeder::class,
         ]);
     }
 }
