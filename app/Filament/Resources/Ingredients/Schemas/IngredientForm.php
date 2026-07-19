@@ -15,7 +15,8 @@ class IngredientForm
                 TextInput::make('name')
                     ->required(),
                 TextInput::make('article_code')
-                    ->hidden(fn (?string $operation, $state) => $operation === 'view' && blank($state)),
+                    ->unique(ignoreRecord: true)
+                    ->hidden(fn(?string $operation, $state) => $operation === 'view' && blank($state)),
             ]);
     }
 }

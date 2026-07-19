@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('picture_path', 255)->nullable();
             $table->string('signature', 255)->nullable();
             $table->tinyInteger('is_active')->default(1);
+            $table->rememberToken();
             $table->timestamps();
         });
     }

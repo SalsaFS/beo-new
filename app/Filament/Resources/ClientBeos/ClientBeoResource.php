@@ -31,11 +31,6 @@ class ClientBeoResource extends Resource
         return ClientBeoForm::configure($schema);
     }
 
-    public static function infolist(Schema $schema): Schema
-    {
-        return ClientBeoInfolist::configure($schema);
-    }
-
     public static function table(Table $table): Table
     {
         return ClientBeosTable::configure($table);
@@ -52,9 +47,6 @@ class ClientBeoResource extends Resource
     {
         return [
             'index' => ListClientBeos::route('/'),
-            'create' => CreateClientBeo::route('/create'),
-            'view' => ViewClientBeo::route('/{record}'),
-            'edit' => EditClientBeo::route('/{record}/edit'),
         ];
     }
 }

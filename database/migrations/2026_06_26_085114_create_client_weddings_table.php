@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('guest_number', 100);
             $table->string('pic', 255);
             $table->text('address')->nullable();
-            $table->string('mobile', 20);
-            $table->string('telephone', 20);
+            $table->string('mobile', 20)->nullable();
+            $table->string('telephone', 20)->nullable();
             $table->timestamps();
         });
     }

@@ -14,6 +14,7 @@ class ListClientWeddings extends ListRecords
     {
         return [
             CreateAction::make()
+                ->modal()
                 ->createAnother(false),
         ];
     }

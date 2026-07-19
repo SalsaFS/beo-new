@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\ClientWeddings\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
@@ -18,30 +19,59 @@ class ClientWeddingsTable
                 TextColumn::make('guest_number')
                     ->searchable(),
                 TextColumn::make('pic')
+                    ->label('PIC')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('address')
+                    ->wrap()
                     ->searchable(),
                 TextColumn::make('mobile')
                     ->searchable(),
-                TextColumn::make('telephone')
-                    ->searchable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                ViewAction::make()
+                    ->hiddenLabel()
+                    ->tooltip('View'),
+                EditAction::make()
+                    ->modal()
+                    ->hiddenLabel()
+                    ->tooltip('Edit'),
+                DeleteAction::make()
+                    ->hiddenLabel()
+                    ->tooltip('Delete')
+                    ->before(function (DeleteAction $action, \App\Models\ClientBeo $record) {
+                        if ($record->beos()->exists()) {
+                            \Filament\Notifications\Notification::make()
+                                ->title('Tidak dapat menghapus')
+                                ->body('Data tidak dapat dihapus karena terdaftar di BEO')
+                                ->danger()
+                                ->send();
+
+                            $action->cancel();
+                        }
+                    }),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                        ->before(function (DeleteBulkAction $action, \Illuminate\Database\Eloquent\Collection $records) {
+                            $used = $records->filter(function ($record) {
+                                return $record->beos()->exists();
+                            });
+
+                            if ($used->isNotEmpty()) {
+                                \Filament\Notifications\Notification::make()
+                                    ->title('Tidak dapat menghapus')
+                                    ->body('Data tidak dapat dihapus karena terdaftar di BEO.')
+                                    ->danger()
+                                    ->send();
+
+                                $action->cancel();
+                            }
+                        }),
                 ]),
             ]);
     }

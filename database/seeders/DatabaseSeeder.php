@@ -10,6 +10,8 @@ use Database\Seeders\PositionSeeder;
 use Database\Seeders\VenueSeeder;
 use Database\Seeders\UnitSeeder;
 use Database\Seeders\IngredientSeeder;
+use Database\Seeders\ClientBeoSeeder;
+use Database\Seeders\ClientWeddingSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -37,6 +39,8 @@ class DatabaseSeeder extends Seeder
             VenueSeeder::class,
             UnitSeeder::class,
             IngredientSeeder::class,
+            ClientBeoSeeder::class,
+            ClientWeddingSeeder::class,
         ]);
     }
 }

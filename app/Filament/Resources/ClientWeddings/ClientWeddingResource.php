@@ -31,11 +31,6 @@ class ClientWeddingResource extends Resource
         return ClientWeddingForm::configure($schema);
     }
 
-    public static function infolist(Schema $schema): Schema
-    {
-        return ClientWeddingInfolist::configure($schema);
-    }
-
     public static function table(Table $table): Table
     {
         return ClientWeddingsTable::configure($table);
@@ -52,9 +47,6 @@ class ClientWeddingResource extends Resource
     {
         return [
             'index' => ListClientWeddings::route('/'),
-            'create' => CreateClientWedding::route('/create'),
-            'view' => ViewClientWedding::route('/{record}'),
-            'edit' => EditClientWedding::route('/{record}/edit'),
         ];
     }
 }

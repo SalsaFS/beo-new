@@ -3,6 +3,9 @@
 namespace App\Filament\Resources\Beos\Schemas;
 
 use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Components\ViewEntry;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class BeoInfolist
@@ -10,39 +13,33 @@ class BeoInfolist
     public static function configure(Schema $schema): Schema
     {
         return $schema
+            ->columns(1)
             ->components([
-                TextEntry::make('client_beo_id')
-                    ->numeric(),
-                TextEntry::make('user_id')
-                    ->numeric(),
-                TextEntry::make('event_number'),
-                TextEntry::make('date_of_function')
-                    ->date(),
-                TextEntry::make('guaranteed')
-                    ->numeric()
-                    ->placeholder('-'),
-                TextEntry::make('expected')
-                    ->numeric()
-                    ->placeholder('-'),
-                TextEntry::make('setup_arrangements')
-                    ->placeholder('-')
-                    ->columnSpanFull(),
-                TextEntry::make('payment_information')
-                    ->placeholder('-'),
-                TextEntry::make('other_note')
-                    ->placeholder('-')
-                    ->columnSpanFull(),
-                TextEntry::make('note')
-                    ->placeholder('-')
-                    ->columnSpanFull(),
-                TextEntry::make('signed')
-                    ->placeholder('-'),
-                TextEntry::make('created_at')
-                    ->dateTime()
-                    ->placeholder('-'),
-                TextEntry::make('updated_at')
-                    ->dateTime()
-                    ->placeholder('-'),
+                Section::make('details')
+                    ->heading(false)
+                    ->schema([
+                        ViewEntry::make('Details')
+                            ->view('filament.beo.beo.beo-header')
+                    ]),
+                Grid::make(5)
+                    ->schema([
+                        Section::make('menu')
+                            ->columnSpan(2)
+                            ->heading(false)
+                            ->schema([
+                                ViewEntry::make('menu_note')
+                                    ->view('filament.beo.beo.beo-menu'),
+                            ])
+                            ->extraAttributes(['class' => 'h-full']),
+                        Section::make('setup')
+                            ->columnSpan(3)
+                            ->heading(false)
+                            ->schema([
+                                ViewEntry::make('setup_arrangement')
+                                    ->view('filament.beo.beo.beo-setup')
+                            ])
+                            ->extraAttributes(['class' => 'h-full']),
+                    ]),
             ]);
     }
 }

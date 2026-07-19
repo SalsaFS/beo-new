@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BeoPackage extends Model
 {
-    protected $table = 'beos';
+    protected $table = 'beo_packages';
     protected $fillable = [
         'beo_id',
         'package_id',

@@ -15,17 +15,21 @@ class BeoFunctionPackage extends Model
         'time_start',
         'time_end',
         'pax',
-    ]; 
+    ];
     public function beo()
     {
         return $this->belongsTo(Beo::class, 'beo_id');
-    } 
+    }
     public function venue()
     {
         return $this->belongsTo(Venue::class, 'venue_id');
-    } 
+    }
     public function setup()
     {
         return $this->belongsTo(Setup::class, 'setup_id');
-    } 
+    }
+    public function beoMenus()
+    {
+        return $this->hasMany(BeoMenu::class, 'beo_function_id');
+    }
 }

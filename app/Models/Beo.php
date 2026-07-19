@@ -48,4 +48,37 @@ class Beo extends Model
     {
         return $this->hasMany(AdditionalBreakdown::class,'beo_id');
     }
+
+    protected static function booted(): void
+    {
+        static::created(function (Beo $beo) {
+            $userIds = [];
+
+            if (filled($beo->user_id)) {
+                $userIds[] = $beo->user_id;
+            }
+
+            foreach (Position::query()->orderBy('signature_positions')->get() as $position) {
+                $approver = \App\Models\User::query()
+                    ->where('position_id', $position->id)
+                    ->where('is_active', 1)
+                    ->whereHas('roles', function ($q) {
+                        $q->where('name', 'approver');
+                    })
+                    ->first();
+
+                if ($approver && ! in_array($approver->id, $userIds, true)) {
+                    $userIds[] = $approver->id;
+                }
+            }
+
+            foreach ($userIds as $userId) {
+                BeoApproval::create([
+                    'beo_id' => $beo->id,
+                    'user_id' => $userId,
+                    'is_verify' => 0,
+                ]);
+            }
+        });
+    }
 }

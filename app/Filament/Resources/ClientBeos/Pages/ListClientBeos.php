@@ -14,6 +14,7 @@ class ListClientBeos extends ListRecords
     {
         return [
             CreateAction::make()
+                ->modal()
                 ->createAnother(false),
         ];
     }
