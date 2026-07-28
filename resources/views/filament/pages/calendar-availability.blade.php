@@ -485,6 +485,12 @@
         .dark .tt-table tr:nth-child(even) td.tt-hour-cell {
             background: #1a1a2e;
         }
+
+        .dark .cal-nav select {
+            border-color: #374151 !important;
+            background: #1f2937 !important;
+            color: #e5e7eb !important;
+        }
     </style>
 
     <div class="cal-grid">

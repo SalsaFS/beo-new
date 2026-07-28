@@ -21,6 +21,7 @@ class MenusTable
     public static function configure(Table $table): Table
     {
         return $table
+            ->heading(fn ($livewire) => 'Total Menu - ' . $livewire->getFilteredTableQuery()->count())
             ->contentGrid([
                 'sm' => 1,
                 'md' => 2,
@@ -33,6 +34,11 @@ class MenusTable
                         ->imageHeight(150)
                         ->width(200)
                         ->defaultImageUrl(asset('images/no-image.jpg')),
+                        TextColumn::make('menuCode.name')
+                        ->formatStateUsing(function ($state, $record) {
+                            return "{$state}-{$record->menu_code_number}";
+                        })
+                        ->searchable(),
                     TextColumn::make('menuType.name')
                         ->formatStateUsing(function ($state, $record) {
                             return "{$state} . {$record->menuSubType->name}";
@@ -48,6 +54,9 @@ class MenusTable
                     ->space(1)
             ])
             ->filters([
+                SelectFilter::make('menu_code_id')
+                    ->relationship('menuCode', 'name')
+                    ->label('Menu Code'),
                 SelectFilter::make('menu_type_id')
                     ->relationship('menuType', 'name')
                     ->label('Menu Type'),

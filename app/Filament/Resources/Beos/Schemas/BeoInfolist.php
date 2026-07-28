@@ -57,6 +57,7 @@ class BeoInfolist
 
                         foreach ($record->beoFunctionPackages as $pkg) {
                             $rows[] = [
+                                'time_start' => $pkg->time_start,
                                 'time' => $pkg->time_start && $pkg->time_end
                                     ? \Carbon\Carbon::parse($pkg->time_start)->format('H:i') . '-' . \Carbon\Carbon::parse($pkg->time_end)->format('H:i')
                                     : '',
@@ -69,6 +70,7 @@ class BeoInfolist
 
                         foreach ($record->beoFunctions as $fn) {
                             $rows[] = [
+                                'time_start' => $fn->time_start,
                                 'time' => $fn->time_start && $fn->time_end
                                     ? \Carbon\Carbon::parse($fn->time_start)->format('H:i') . '-' . \Carbon\Carbon::parse($fn->time_end)->format('H:i')
                                     : '',
@@ -78,6 +80,8 @@ class BeoInfolist
                                 'pax' => $fn->pax,
                             ];
                         }
+
+                        usort($rows, fn($a, $b) => $a['time_start'] <=> $b['time_start']);
 
                         return $rows;
                     })

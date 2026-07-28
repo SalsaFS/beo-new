@@ -33,9 +33,13 @@ class MenuForm
                             ])
                             ->preload()
                             ->searchable()
-                            ->required(),
+                            ->required()
+                            ->live()
+                            ->afterStateUpdated(function ($state, $set) {
+                                $max = \App\Models\Menu::where('menu_code_id', $state)->max('menu_code_number');
+                                $set('menu_code_number', str_pad((int) $max + 1, 5, '0', STR_PAD_LEFT));
+                            }),
                         TextInput::make('menu_code_number')
-                            ->unique(ignoreRecord: true)
                             ->required(),
                     ]),
                 Grid::make(2)
