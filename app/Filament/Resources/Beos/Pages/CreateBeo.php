@@ -10,6 +10,11 @@ class CreateBeo extends CreateRecord
     protected static string $resource = BeoResource::class;
     protected static bool $canCreateAnother = false;
 
+    public function hasDatabaseTransactions(): bool
+    {
+        return true;
+    }
+
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');

@@ -232,6 +232,7 @@ class BeoForm
                                             'offline' => 'Offline'
                                         ]),
                                     Repeater::make('internalBreakdowns')
+                                        ->relationship('internalBreakdowns')
                                         ->columnSpanFull()
                                         ->table([
                                             TableColumn::make('name'),
@@ -323,7 +324,7 @@ class BeoForm
                                                 'pax' => $pax,
                                                 'banquet' => null,
                                                 'time_start' => '00:00:00',
-                                                'time_end' => '00:00:01',
+                                                'time_end' => '00:00:00',
                                             ];
                                         }
                                     }
@@ -342,7 +343,7 @@ class BeoForm
                                             'setup_id' => $p['setup_id'] ?? null,
                                             'pax' => $p['pax'] ?? null,
                                             'time_start' => '00:00:00',
-                                            'time_end' => '00:00:01',
+                                            'time_end' => '00:00:00',
                                         ];
                                     }
 
@@ -382,12 +383,14 @@ class BeoForm
                                         ])
                                         ->relationship('setup', 'name'),
                                     TimePicker::make('time_start')
+                                        ->native(false)
                                         ->default('00:00:00')
                                         ->timezone('Asia/Jakarta')
                                         ->required()
                                         ->before('time_end'),
                                     TimePicker::make('time_end')
-                                        ->default('00:00:01')
+                                        ->native(false)
+                                        ->default('00:00:00')
                                         ->timezone('Asia/Jakarta')
                                         ->required()
                                         ->after('time_start')
@@ -439,12 +442,14 @@ class BeoForm
                                         ])
                                         ->relationship('setup', 'name'),
                                     TimePicker::make('time_start')
+                                        ->native(false)
                                         ->default('00:00:00')
                                         ->timezone('Asia/Jakarta')
                                         ->required()
                                         ->before('time_end'),
                                     TimePicker::make('time_end')
-                                        ->default('00:00:01')
+                                        ->native(false)
+                                        ->default('00:00:00')
                                         ->timezone('Asia/Jakarta')
                                         ->required()
                                         ->after('time_start')
@@ -460,7 +465,7 @@ class BeoForm
                                             'request' => 'Request',
                                             'as per chef' => 'As Per Chef',
                                         ]),
-                                    Textarea::make('addon')
+                                    Textarea::make('menu_addon')
                                         ->label('Menu Addon')
                                         ->columnSpanFull()
                                         ->visible(function (Get $get) {

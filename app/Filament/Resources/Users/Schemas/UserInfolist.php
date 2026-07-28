@@ -23,6 +23,8 @@ class UserInfolist
                     ->schema([
                         ImageEntry::make('picture_path')
                             ->hiddenLabel()
+                            ->imageWidth(200)
+                            ->extraImgAttributes(['style' => 'object-fit: contain'])
                             ->visible(function (User $record) {
                                 return $record->picture_path;
                             }),
@@ -56,10 +58,12 @@ class UserInfolist
                                 ]),
                         ])
                             ->columns(4),
-                        TextEntry::make('signature')
-                            ->hiddenLabel()
+                        ImageEntry::make('signature')
+                            ->label('Signature')
+                            ->imageSize(200)
+                            ->extraImgAttributes(['style' => 'object-fit: contain'])
                             ->visible(function (User $record) {
-                                return $record->picture_path;
+                                return $record->signature;
                             }),
                     ]),
             ]);

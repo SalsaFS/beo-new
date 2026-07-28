@@ -40,6 +40,10 @@ class Venue extends Model
     {
         return $this->hasMany(BeoWeddingMakeUp::class,'venue_id');
     }
+    public function beoWeddings()
+    {
+        return $this->belongsToMany(BeoWedding::class, 'beo_wedding_make_ups', 'venue_id', 'beo_wedding_id');
+    }
     public function beoAmendmentPackages()
     {
         return $this->hasMany(BeoAmendmentPackage::class,'venue_id');

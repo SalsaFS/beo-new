@@ -7,3 +7,24 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+/* Equal-height grid columns for BEO infolist (menu vs setup) */
+.fi-grid-stretch {
+    align-items: stretch !important;
+}
+
+.fi-grid-stretch > * {
+    display: flex !important;
+    min-width: 0;
+}
+
+.fi-grid-stretch > * > .fi-section,
+.fi-grid-stretch .fi-section {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.fi-grid-stretch .fi-section-content {
+    flex: 1 1 auto !important;
+}

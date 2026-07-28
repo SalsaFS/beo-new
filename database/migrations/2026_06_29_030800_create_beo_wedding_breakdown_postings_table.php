@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('beo_wedding_id')->constrained()->onDelete('cascade');
             $table->string('name',255)->nullable();
-            $table->integer('ammount')->nullable();
+            $table->integer('amount')->nullable();
             $table->decimal('rate',15,2)->nullable();
             $table->string('remark',255)->nullable();
             $table->enum('revenue_type',['hotel','room','vendor'])->nullable();

@@ -78,7 +78,7 @@ class BeosTable
                                                 : '✗ Not Verified';
                                         })
                                         ->badge()
-                                        ->color(fn ($state) => $state ? 'success' : 'danger'),
+                                        ->color(fn($state) => $state ? 'success' : 'danger'),
                                 ]),
                         ];
                     }),
@@ -90,10 +90,10 @@ class BeosTable
                         $approvals = $record->beoApprovals;
 
                         return $approvals->isNotEmpty()
-                            && $approvals->every(fn ($a) => $a->is_verify == 1);
+                            && $approvals->every(fn($a) => $a->is_verify != 0);
                     })
                     ->action(function ($record) {
-                        $filename = 'beo-' . ($record->event_number ?? $record->id) . '.xlsx';
+                        $filename = ($record->event_number ?? '') . ' - ' . ($record->client->company ?? '') . '.xlsx';
 
                         return \Maatwebsite\Excel\Facades\Excel::download(
                             new \App\Exports\BeoExport($record),

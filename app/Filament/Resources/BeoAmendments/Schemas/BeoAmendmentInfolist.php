@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\BeoAmendments\Schemas;
 
 use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class BeoAmendmentInfolist
@@ -11,28 +12,42 @@ class BeoAmendmentInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('beo_id')
-                    ->numeric(),
-                TextEntry::make('name_of_event'),
-                TextEntry::make('contact_person')
-                    ->placeholder('-'),
-                TextEntry::make('contact')
-                    ->placeholder('-'),
-                TextEntry::make('date_change')
-                    ->date()
-                    ->placeholder('-'),
-                TextEntry::make('other_before')
-                    ->placeholder('-')
-                    ->columnSpanFull(),
-                TextEntry::make('other_after')
-                    ->placeholder('-')
-                    ->columnSpanFull(),
-                TextEntry::make('created_at')
-                    ->dateTime()
-                    ->placeholder('-'),
-                TextEntry::make('updated_at')
-                    ->dateTime()
-                    ->placeholder('-'),
+                Section::make('details')
+                    ->columnSpanFull()
+                    ->columns(2)
+                    ->inlineLabel(true)
+                    ->heading(false)
+                    ->schema([
+                        TextEntry::make('beo.event_number')
+                            ->label('Beo Event Number'),
+                        TextEntry::make('created_at')
+                            ->label('Date Issued')
+                            ->date('d F Y'),
+                        TextEntry::make('name_of_event'),
+                        TextEntry::make('date_change')
+                            ->date('d F Y')
+                            ->label('Date of Event'),
+                        TextEntry::make('contact_person'),
+                        TextEntry::make('contact'),
+                        TextEntry::make('beoAmendmentPackages.package.name')
+                            ->label('Package'),
+                        TextEntry::make('beoAmendmentPackages.venue.name')
+                            ->label('Venue'),
+                    ]),
+                Section::make('Before')
+                    ->schema([
+                        TextEntry::make('other_before')
+                            ->hiddenLabel()
+                            ->html()
+                            ->extraAttributes(['class' => 'fi-prose'])
+                    ]),
+                Section::make('After')
+                    ->schema([
+                        TextEntry::make('other_after')
+                            ->hiddenLabel()
+                            ->html()
+                            ->extraAttributes(['class' => 'fi-prose'])
+                    ]),
             ]);
     }
 }

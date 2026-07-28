@@ -11,11 +11,20 @@ class EditBeoWedding extends EditRecord
 {
     protected static string $resource = BeoWeddingResource::class;
 
+    public function hasDatabaseTransactions(): bool
+    {
+        return true;
+    }
+
     protected function getHeaderActions(): array
     {
         return [
             ViewAction::make(),
             DeleteAction::make(),
         ];
+    }
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('view', ['record' => $this->record]);
     }
 }

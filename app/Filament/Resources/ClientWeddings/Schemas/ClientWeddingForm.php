@@ -15,6 +15,11 @@ class ClientWeddingForm
             ->columns(1)
             ->components([
                 TextInput::make('guest_number')
+                    ->default(function () {
+                        $total = \App\Models\ClientWedding::count() + 1;
+
+                        return str_pad($total, 6, '0', STR_PAD_LEFT);
+                    })
                     ->required(),
                 TextInput::make('pic')
                     ->label('PIC')

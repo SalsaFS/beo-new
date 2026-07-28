@@ -11,6 +11,11 @@ class EditBeo extends EditRecord
 {
     protected static string $resource = BeoResource::class;
 
+    public function hasDatabaseTransactions(): bool
+    {
+        return true;
+    }
+
     protected function getHeaderActions(): array
     {
         return [

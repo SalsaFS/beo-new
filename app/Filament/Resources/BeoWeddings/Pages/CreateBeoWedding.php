@@ -8,4 +8,15 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateBeoWedding extends CreateRecord
 {
     protected static string $resource = BeoWeddingResource::class;
+    protected static bool $canCreateAnother = false;
+
+    public function hasDatabaseTransactions(): bool
+    {
+        return true;
+    }
+
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }
