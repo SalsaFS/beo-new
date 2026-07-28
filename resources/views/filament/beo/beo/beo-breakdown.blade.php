@@ -54,6 +54,7 @@
             $totalPackage = 0;
         @endphp
 
+        <div style="overflow: auto;">
         <table style="width: 100%; font-size: 13px; text-align: left; border-collapse: collapse; border: 1px solid #e5e7eb;">
             <thead>
                 <tr>
@@ -89,10 +90,12 @@
                 </tr>
             </tbody>
         </table>
+        </div>
     @endforeach
 
     @if ($record->additionalBreakdowns->count() > 0)
         <h4 style="font-weight: 700; font-size: 14px; text-transform: uppercase;">Additional Breakdown</h4>
+        <div style="overflow: auto;">
         <table style="width: 100%; font-size: 13px; text-align: left; border-collapse: collapse; border: 1px solid #e5e7eb;">
             <thead>
                 <tr class="bd-additional-header" style="background-color: #fbbf24;">
@@ -111,5 +114,6 @@
                 @endforeach
             </tbody>
         </table>
+        </div>
     @endif
 </div>

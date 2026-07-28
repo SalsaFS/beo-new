@@ -39,6 +39,7 @@
 
         <h4 style="font-weight: 700; font-size: 14px; text-transform: uppercase;">{{ $headerLabel }}</h4>
 
+        <div style="overflow: auto;">
         <table style="width: 100%; font-size: 13px; text-align: left; border-collapse: collapse; border: 1px solid #e5e7eb;">
             <thead>
                 <tr class="wbd-c{{ $index % count($colors) }}" style="background-color: {{ $currentColor }};">
@@ -69,6 +70,7 @@
                 </tr>
             </tbody>
         </table>
+        </div>
 
         @if ($type === 'hotel')
             @php
@@ -76,6 +78,7 @@
             @endphp
 
             <h4 style="font-weight: 700; font-size: 14px; text-transform: uppercase;">Additional Meal</h4>
+            <div style="overflow: auto;">
             <table style="width: 100%; font-size: 13px; text-align: left; border-collapse: collapse; border: 1px solid #e5e7eb;">
                 <thead>
                     <tr class="wbd-additional-header" style="background-color: #fbbf24;">
@@ -108,6 +111,7 @@
                     </tr>
                 </tbody>
             </table>
+            </div>
         @endif
 
         @php

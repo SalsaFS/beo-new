@@ -7,12 +7,12 @@
     <div style="min-height: 75px; padding: 16px;">
         <div>
             @if($record->setup_arrangements != '<p></p>')
-                {!! $record->setup_arrangements !!}
+                {!! strip_tags($record->setup_arrangements) !!}
             @else
                 <span>No arrangement notes...</span>
             @endif
             @if($record->note != '<p></p>')
-                <br><b>Notes : </b>{!! $record->note !!}
+                <br><b>Notes : </b>{!! strip_tags($record->note) !!}
             @endif
         </div>
     </div>

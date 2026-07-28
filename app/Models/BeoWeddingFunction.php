@@ -16,6 +16,7 @@ class BeoWeddingFunction extends Model
         'time_end',
         'pax',
         'free_meal',
+        'sort',
     ]; 
     public function beoWedding()
     {

@@ -34,7 +34,7 @@ class Beo extends Model
     }
     public function beoFunctions()
     {
-        return $this->hasMany(BeoFunction::class,'beo_id');
+        return $this->hasMany(BeoFunction::class,'beo_id')->orderBy('sort');
     }
     public function beoFunctionPackages()
     {

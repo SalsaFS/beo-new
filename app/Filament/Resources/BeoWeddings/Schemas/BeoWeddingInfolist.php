@@ -60,7 +60,6 @@ class BeoWeddingInfolist
 
                         foreach ($record->beoWeddingFunctions as $fn) {
                             $rows[] = [
-                                'time_start' => $fn->time_start,
                                 'time' => $fn->time_start && $fn->time_end
                                     ? \Carbon\Carbon::parse($fn->time_start)->format('H:i') . '-' . \Carbon\Carbon::parse($fn->time_end)->format('H:i')
                                     : '',
@@ -70,8 +69,6 @@ class BeoWeddingInfolist
                                 'pax' => $fn->pax,
                             ];
                         }
-
-                        usort($rows, fn($a, $b) => $a['time_start'] <=> $b['time_start']);
 
                         return $rows;
                     })
@@ -84,10 +81,22 @@ class BeoWeddingInfolist
                     ])
                     ->schema([
                         TextEntry::make('time'),
-                        TextEntry::make('function'),
+                        TextEntry::make('function')
+                            ->alignCenter()
+                            ->weight(FontWeight::Bold),
                         TextEntry::make('venue'),
                         TextEntry::make('setup'),
                         TextEntry::make('pax'),
+                    ]),
+                Section::make('Signed')
+                    ->heading(false)
+                    ->schema([
+                        TextEntry::make('signed')
+                            ->label('SIGNED')
+                            ->alignCenter()
+                            ->formatStateUsing(fn($state) => "'{$state}'")
+                            ->inlineLabel(true)
+                            ->weight(FontWeight::Bold),
                     ]),
                 Grid::make(5)
                     ->schema([
@@ -100,12 +109,16 @@ class BeoWeddingInfolist
                                     ->columns(1)
                                     ->dense(true)
                                     ->contained(false)
-                                    ->extraAttributes(['style' => 'display: flex; flex-direction: column; gap: 8px;'])
+                                    ->extraAttributes(['style' => 'display: flex; flex-direction: column; gap: 10px;'])
                                     ->getStateUsing(function (RepeatableEntry $component) {
                                         $record = $component->getRecord();
                                         $items = [];
 
                                         foreach ($record->beoWeddingFunctions as $function) {
+                                            if (!$function->free_meal && $function->beoWeddingAdditionalMeals->isEmpty()) {
+                                                continue;
+                                            }
+
                                             $additionalMenus = [];
                                             foreach ($function->beoWeddingAdditionalMeals as $beoMenu) {
                                                 $additionalMenus[] = [
@@ -127,7 +140,8 @@ class BeoWeddingInfolist
                                         TextEntry::make('function')
                                             ->hiddenLabel()
                                             ->columnSpanFull()
-                                            ->weight(FontWeight::Bold),
+                                            ->weight(FontWeight::Bold)
+                                            ->alignCenter(),
                                         RepeatableEntry::make('menus')
                                             ->columns(2)
                                             ->label('Additional')

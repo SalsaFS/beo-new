@@ -27,6 +27,7 @@ class MeetingRoomsTable
                         return "{$record->dimension_p}m x {$record->dimension_l}m ({$formattedArea} m²)";
                     })
                     ->sortable(query: function (\Illuminate\Database\Eloquent\Builder $query, string $direction) {
+                        $direction = in_array($direction, ['asc', 'desc']) ? $direction : 'asc';
                         return $query->orderByRaw('(dimension_p * dimension_l) ' . $direction);
                     }),
                 TextColumn::make('ceiling_height')

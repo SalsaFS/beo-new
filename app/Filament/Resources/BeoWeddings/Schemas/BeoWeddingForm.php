@@ -274,6 +274,8 @@ class BeoWeddingForm
                                 ->hiddenLabel()
                                 ->columns(2)
                                 ->relationship('beoWeddingFunctions')
+                                ->reorderableWithButtons()
+                                ->orderColumn('sort')
                                 ->schema([
                                     Select::make('function_id')
                                         ->required()
@@ -359,6 +361,7 @@ class BeoWeddingForm
                                         ->label('Free Meal List'),
                                 ])
                                 ->addActionLabel('Add Function')
+                                ->reorderable(true)
                                 ->minItems(1)
                                 ->itemLabel('Function Item')
                                 ->itemNumbers(),

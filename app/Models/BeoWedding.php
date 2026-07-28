@@ -35,7 +35,7 @@ class BeoWedding extends Model
     }
     public function beoWeddingFunctions()
     {
-        return $this->hasMany(BeoWeddingFunction::class, 'beo_wedding_id');
+        return $this->hasMany(BeoWeddingFunction::class, 'beo_wedding_id')->orderBy('sort');
     }
     public function beoWeddingPackages()
     {

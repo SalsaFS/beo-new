@@ -19,7 +19,7 @@
             @endforeach
             <div class="text-sm" style="text-align: left;">
                 @if ($record->other_note)
-                    <b>Other notes : </b>{!! $record->other_note !!}
+                    <b>Other notes : </b>{!! strip_tags($record->other_note) !!}
                 @endif
             </div>
         </div>

@@ -17,6 +17,7 @@ class BeoFunction extends Model
         'pax',
         'banquet',
         'menu_addon',
+        'sort',
     ];
     public function beo()
     {

@@ -22,6 +22,7 @@
 <div class="wb-wrap" style="display: flex; flex-direction: column; gap: 16px;">
     <h4 style="font-weight: 700; font-size: 14px; text-transform: uppercase;">Billing Instruction</h4>
 
+    <div style="overflow: auto;">
     <table style="width: 100%; font-size: 13px; text-align: left; border-collapse: collapse; border: 1px solid #e5e7eb;">
         <tbody>
             @php
@@ -82,11 +83,12 @@
             </tr>
         </tbody>
     </table>
+    </div>
 
     @if ($record->payment_note)
-        <div class="wb-note" style="font-size: 13px;"><b>Payment notes : </b>{!! $record->payment_note !!}</div>
+        <div class="wb-note" style="font-size: 13px;"><b>Payment notes : </b>{!! strip_tags($record->payment_note) !!}</div>
     @endif
     @if ($record->payment_information)
-        <div class="wb-note" style="font-size: 13px;"><b>Payment Information : </b>{!! $record->payment_information !!}</div>
+        <div class="wb-note" style="font-size: 13px;"><b>Payment Information : </b>{!! strip_tags($record->payment_information) !!}</div>
     @endif
 </div>

@@ -404,6 +404,8 @@ class BeoForm
                                 ->hiddenLabel()
                                 ->columns(2)
                                 ->relationship('beoFunctions')
+                                ->reorderable()
+                                ->orderColumn('sort')
                                 ->schema([
                                     Select::make('function_id')
                                         ->required()
@@ -487,6 +489,10 @@ class BeoForm
                                         ->schema([
                                             Select::make('menu_id')
                                                 ->label('Menu')
+                                                ->searchable()
+                                                ->preload()
+                                                ->noOptionsMessage('No menu available.')
+                                                ->noSearchResultsMessage('No menu found.')
                                                 ->relationship('menu', 'name')
                                                 ->required()
                                                 ->createOptionForm([
@@ -619,6 +625,7 @@ class BeoForm
                         ->columns(1)
                         ->schema([
                             Repeater::make('additionalBreakdowns')
+                                ->relationship('additionalBreakdowns')
                                 ->table([
                                     TableColumn::make('Item Name'),
                                     TableColumn::make('Billing Type'),
